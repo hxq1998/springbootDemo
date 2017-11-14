@@ -12,9 +12,15 @@ public class ThisWillActuallyRun {
 	 */
 	@Value("${system.name}")
 	private String name;
+	
+	/**
+	 * 1024~65535 并不是每次都随机数，是服务器启动了就会随机数
+	 */
+	@Value("${my.number.in.range}")
+	private Integer num;
 
 	@RequestMapping("/good")
     String home() {
-        return name;
+        return name + num.toString();
     }
 }
