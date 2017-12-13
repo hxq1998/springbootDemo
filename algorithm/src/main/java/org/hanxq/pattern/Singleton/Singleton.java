@@ -12,4 +12,52 @@ public class Singleton {
 		
 	}
 	
+	public static Singleton getInstance(){
+		return enumSingleton.INSTANCE.getInstance();
+	}
+	
+	// 私有化的枚举类型
+	private static enum enumSingleton{
+		INSTANCE;
+		
+		
+		
+		private Singleton singleton;
+		
+		//JVM会保证此方法绝对只调用一次
+		private enumSingleton(){
+			singleton = new Singleton();
+			System.out.println("调用了！");
+		}
+		
+		public Singleton getInstance(){
+			return this.singleton;
+		}
+		
+		
+	}
+	
+	// 枚举类Light
+	public static enum Light{
+		
+		RED(1),GREEN(3),BLUE(5);
+		
+		// 定义私有变量
+		private int code;
+		
+		private Light(int c){
+			this.code = c;
+		}
+		
+		public int getCode() {
+			return code;
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		Singleton s1 = Singleton.getInstance();
+		Singleton s2 = Singleton.getInstance();
+		System.out.println(Singleton.Light.BLUE.getCode() + 1);
+	}
 }
